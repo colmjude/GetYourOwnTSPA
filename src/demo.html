@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TiddlySignUp</title>
+	<link rel="stylesheet" type="text/css" href="/bags/common/tiddlers/normalize.css" />
+	<style type="text/css">
+		#getyourowntspa {
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+    </head>
+    <body>
+
+		<div id="getyourowntspa" ></div>
+
+        <script src="/bags/common/tiddlers/jquery.js"></script>
+		<!-- really all these? -->
+		<script src='/bags/tiddlyspace/tiddlers/chrjs'></script>
+		<script src='/bags/common/tiddlers/chrjs.space'></script>
+		<script src='/bags/common/tiddlers/chrjs.users'></script>
+		<script src='/bags/common/tiddlers/chrjs.identities'></script>
+		<script src="/status.js"></script>
+		
+		
+		<script src="jquery.getyourowntspa.js"></script>
+		<script>
+			(function($) {
+				// on document load
+				$(function() {
+					// init plugin
+					$("#getyourowntspa").getyourowntspa();
+				});
+			}(jQuery));
+		</script>
+    </body>
+</html>
