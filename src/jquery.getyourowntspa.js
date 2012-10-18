@@ -34,7 +34,8 @@
 	var pluginName = 'getyourowntspa',
 		document = window.document,
 		defaults = {
-			homespace: true
+			homespace: true,
+			htmlPageName: "index"
 		};
 
 	// The actual plugin constructor
@@ -80,6 +81,7 @@
 					// tell user they have already included it
 					console.log("space already included");
 					// provide link to their instance
+					var href = self.makeLinkToInstance();
 				} else {
 					//show element, add click handler
 					$el.click(addInclude);
@@ -111,6 +113,12 @@
 						.includes()
 						.add(this.spa_space, callback, errback);
 		}
+	};
+
+	Plugin.prototype.makeLinkToInstance = function() {
+		var twServer = tiddlyweb.status.server_host;
+		return twServer.scheme + "://" + this.spa_space + "." + 
+					twServer.host + "/" + this.options.htmlPageName;
 	};
 
 	// A really lightweight plugin wrapper around the constructor,
