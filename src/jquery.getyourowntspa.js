@@ -45,6 +45,7 @@
 
 		this._defaults = defaults;
 		this._name = pluginName;
+		this.spa_space = tiddlyweb.status.space.name;
 
 		this.init();
 	}
@@ -53,7 +54,8 @@
 
 		// probably want to do a check to see if tiddlyweb is available
 
-		var $el = $(this.element),
+		var self = this,
+			$el = $(this.element),
 			addInclude = (function(that) {
 							return function(e) {
 								that.include();
@@ -61,7 +63,9 @@
 						}(this));
 
 		this.username = tiddlyweb.status.username;
+		console.log(tiddlyweb.status);
 
+		// logged in?
 		if(this.username === "GUEST") {
 			// are they a member
 			// do they want to login and get an instance of X
@@ -69,13 +73,27 @@
 			// hide element
 			$el.hide();
 		} else {
-			// currently logged in
 			// do they want an instance (should check if they have a space with X already included)
-			
-			//show element, add click handler
-			$el.click(addInclude)
+			var userHomespace = new tiddlyweb.Space(this.username, "/");
+			userHomespace.includes().get(function(incls) {
+				if (self.checkExists(incls)) {
+					// tell user they have already included it
+					console.log("space already included");
+					// provide link to their instance
+				} else {
+					//show element, add click handler
+					$el.click(addInclude);
+				}
+			}, function(xhr, error, exc, self) {
+				console.log("error retrieving list of includes");
+			});
 		}
 
+	};
+
+	Plugin.prototype.checkExists = function(incls) {
+		console.log(incls);
+		return ( incls.indexOf(this.spa_space) === -1 ) ? true : false;
 	};
 
 	Plugin.prototype.include = function() {
@@ -91,7 +109,7 @@
 		if( this.options.homespace ) {
 			new tiddlyweb.Space(this.username, "/")
 						.includes()
-						.add(tiddlyweb.status.space.name, callback, errback);
+						.add(this.spa_space, callback, errback);
 		}
 	};
 
