@@ -11,11 +11,17 @@
 			height: 200px;
 			background: red;
 		}
+		.hidden {
+		    display: none;
+		}
 	</style>
     </head>
     <body>
 
-		<div id="getyourowntspa" ></div>
+		<div id="getyourowntspa">
+          <button>Get Your Own</button>
+          <a class="tsapp-goto-btn hidden" href="#">Go to your own version</a>
+		</div>
 
         <script src="/bags/common/tiddlers/jquery.js"></script>
 		<!-- really all these? -->
@@ -23,6 +29,7 @@
 		<script src='/bags/common/tiddlers/chrjs.space'></script>
 		<script src='/bags/common/tiddlers/chrjs.users'></script>
 		<script src='/bags/common/tiddlers/chrjs.identities'></script>
+		<script src="/bags/common/tiddlers/backstage.js"></script>
 		<script src="/status.js"></script>
 		
 		

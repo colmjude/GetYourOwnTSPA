@@ -57,6 +57,7 @@
 
 		var self = this,
 			$el = $(this.element),
+			$includeBtn = $el.find("button"),
 			addInclude = (function(that) {
 							return function(e) {
 								that.include();
@@ -80,11 +81,14 @@
 				if (self.checkExists(incls)) {
 					// provide link to their instance
 					var href = self.makeLinkToInstance();
-					// tell user they have already included it
-					console.log("space already included, go here: ", href);
+					// tell user they can go to their own version
+					$includeBtn.hide();
+					$el.find(".tsapp-goto-btn")
+					    .attr('href', href)
+					    .removeClass("hidden");
 				} else {
 					//show element, add click handler
-					$el.click(addInclude);
+					$includeBtn.click(addInclude);
 				}
 			}, function(xhr, error, exc, self) {
 				console.log("error retrieving list of includes");
@@ -117,7 +121,7 @@
 
 	Plugin.prototype.makeLinkToInstance = function() {
 		var twServer = tiddlyweb.status.server_host;
-		return twServer.scheme + "://" + this.spa_space + "." + 
+		return twServer.scheme + "://" + this.username + "." + 
 					twServer.host + "/" + this.options.htmlPageName;
 	};
 
