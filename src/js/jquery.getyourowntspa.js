@@ -78,10 +78,10 @@
 			var userHomespace = new tiddlyweb.Space(this.username, "/");
 			userHomespace.includes().get(function(incls) {
 				if (self.checkExists(incls)) {
-					// tell user they have already included it
-					console.log("space already included");
 					// provide link to their instance
 					var href = self.makeLinkToInstance();
+					// tell user they have already included it
+					console.log("space already included, go here: ", href);
 				} else {
 					//show element, add click handler
 					$el.click(addInclude);
@@ -95,7 +95,7 @@
 
 	Plugin.prototype.checkExists = function(incls) {
 		console.log(incls);
-		return ( incls.indexOf(this.spa_space) === -1 ) ? true : false;
+		return ( incls.indexOf(this.spa_space) !== -1 ) ? true : false;
 	};
 
 	Plugin.prototype.include = function() {
